@@ -14,5 +14,5 @@ func main() {
 	database.StartDB()
 
 	serverPort := os.Getenv("SERVER_PORT")
-	r.Run(fmt.Sprintf("%v", serverPort) )
+	r.Run(fmt.Sprintf(":%v", serverPort) )
 }
