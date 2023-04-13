@@ -16,14 +16,14 @@ type Comment struct {
 
 type CommentsResponse struct {
 	GormModel
-	Message string `json:"message" `
-	PhotoID int    `json:"photo_id" `
+	Message string `json:"message"`
+	PhotoID int    `json:"photo_id"`
 	UserID  int    `gorm:"foreignKey" json:"user_id"`
 	Photo   struct {
 		ID       int    `json:"photo_id"`
 		Title    string `json:"title"`
 		Caption  string `json:"caption"`
-		PhotoUrl string ` json:"photo_url"`
+		PhotoUrl string `json:"photo_url"`
 	}
 	User struct {
 		Email    string `json:"email"`

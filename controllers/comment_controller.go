@@ -92,7 +92,7 @@ func GetComment(ctx *gin.Context)  {
 	userData := ctx.MustGet("userData").(jwt.MapClaims)
 	comment := models.Comment{}
 	
-	commentID, err := strconv.Atoi(ctx.Param("commentID"))
+	commentID, err := strconv.Atoi(ctx.Param("commentId"))
 	comment.UserID = int(userData["id"].(float64))
 	if err != nil {
 		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{
@@ -110,20 +110,27 @@ func GetComment(ctx *gin.Context)  {
 		return
 	}
 
+	// x := struct {
+	// 	ID       int    `json:"photo_id"`
+	// 	Title    string `json:"title"`
+	// 	Caption  string `json:"caption"`
+	// 	PhotoUrl string `json:"photo_url"`
+	// }{
+	// 	ID:       comment.Photo.ID,
+	// 	Title:    comment.Photo.Title,
+	// 	Caption:  comment.Photo.Caption,
+	// 	PhotoUrl: comment.Photo.PhotoUrl,
+	// }
 	response := models.CommentsResponse{
 		GormModel: comment.GormModel,
 		Message:     comment.Message,
 		PhotoID:   comment.PhotoID,
 		UserID:  comment.UserID,
-		Photo: struct{
-			ID int `json:"photo_id"`; 
-			Title string "json:\"title\""; 
-			Caption string "json:\"caption\""; 
-			PhotoUrl string " json:\"photo_url\""
+		Photo: struct{ID int "json:\"photo_id\""; Title string "json:\"title\""; Caption string "json:\"caption\""; PhotoUrl string "json:\"photo_url\""
 		}{
-			ID: comment.Photo.ID,
-			Title: comment.Photo.Title,
-			Caption: comment.Photo.Caption,
+			ID:       comment.Photo.ID,
+			Title:    comment.Photo.Title,
+			Caption:  comment.Photo.Caption,
 			PhotoUrl: comment.Photo.PhotoUrl,
 		},
 		User: struct {
