@@ -1,6 +1,7 @@
 package routers
 
 import (
+	"net/http"
 	controller "project4/controllers"
 	middleware "project4/middlewares"
 
@@ -9,6 +10,9 @@ import (
 
 func StartApp() *gin.Engine {
 	r := gin.Default()
+	r.GET("/", func(ctx *gin.Context) {
+		ctx.JSON(http.StatusOK, "Welcome to mygram apps")
+	})
 
 	userRouter := r.Group("/users")
 	{
