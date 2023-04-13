@@ -13,6 +13,6 @@ func main() {
 	r := router.StartApp()
 	database.StartDB()
 
-	serverPort := os.Getenv("SERVER_PORT")
+	serverPort := os.Getenv("PORT")
 	r.Run(fmt.Sprintf(":%v", serverPort) )
 }
